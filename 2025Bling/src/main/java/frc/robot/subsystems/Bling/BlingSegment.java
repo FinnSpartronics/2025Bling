@@ -1,6 +1,8 @@
 package frc.robot.subsystems.Bling;
 
 import edu.wpi.first.wpilibj.AddressableLEDBufferView;
+import edu.wpi.first.wpilibj.LEDPattern;
+import edu.wpi.first.wpilibj.util.Color;
 
 public abstract class BlingSegment {
     protected int frame = 0;
@@ -23,4 +25,18 @@ public abstract class BlingSegment {
         incrementFrame();
     }
     abstract protected void updateLights();
+
+    public static final BlingShow show(String filename) {
+        return new BlingShow(filename);
+    }
+    public static final BlingLEDPattern solid(int r, int g, int b, int length) {
+        return new BlingLEDPattern(LEDPattern.solid(new Color(r,g,b)), length);
+    }
+    public static final BlingLEDPattern solid(Color color, int length) {
+        return new BlingLEDPattern(LEDPattern.solid(color), length);
+    }
+    public static final BlingLEDPattern rainbow(int length) {
+        return new BlingLEDPattern(LEDPattern.rainbow(255,255), length);
+    }
+
 }

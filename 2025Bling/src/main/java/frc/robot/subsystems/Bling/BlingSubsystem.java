@@ -8,13 +8,13 @@ public class BlingSubsystem extends SubsystemBase {
 
     private AddressableLED strip;
     private AddressableLEDBuffer buffer;
-    private BlingSegment[] shows;
+    private BlingSegment[] segments;
 
-    public void updateShows(BlingSegment... shows) {
-        this.shows = shows;
+    public void updateSegments(BlingSegment... segments) {
+        this.segments = segments;
 
         int ledLength = 0;
-        for (BlingSegment x : shows) {
+        for (BlingSegment x : segments) {
             ledLength += x.getStripLength();
         }
 
@@ -22,7 +22,7 @@ public class BlingSubsystem extends SubsystemBase {
         buffer = new AddressableLEDBuffer(ledLength);
 
         int index = 0;
-        for (BlingSegment x : shows) {
+        for (BlingSegment x : segments) {
             x.buffer = buffer.createView(index, index + x.ledLength - 1);
             index += x.ledLength;
         }
@@ -31,12 +31,12 @@ public class BlingSubsystem extends SubsystemBase {
     public BlingSubsystem(int port, BlingSegment... shows) {
         strip = new AddressableLED(port);
         strip.start();
-        updateShows(shows);
+        updateSegments(shows);
     }
 
     @Override
     public void periodic() {
-        for (BlingSegment show : shows) {
+        for (BlingSegment show : segments) {
             show.update();
         }
         strip.setData(buffer);
