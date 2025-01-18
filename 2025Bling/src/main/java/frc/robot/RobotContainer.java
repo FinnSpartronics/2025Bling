@@ -8,7 +8,11 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Bling.BlingLEDPattern;
+import frc.robot.subsystems.Bling.BlingShow;
 import frc.robot.subsystems.Bling.BlingSubsystem;
+import edu.wpi.first.wpilibj.LEDPattern;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -22,8 +26,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  //private final BlingSubsystem bling = new BlingSubsystem(1);
-  private final BlingSubsystem bling1 = new BlingSubsystem(0);
+  private final BlingSubsystem bling1 = new BlingSubsystem(0, new BlingShow("fancy.bling"), new BlingLEDPattern(LEDPattern.rainbow(255, 255), 16), new BlingLEDPattern(LEDPattern.solid(Color.kYellow), 5));
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
